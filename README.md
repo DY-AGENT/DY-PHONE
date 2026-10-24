@@ -36,7 +36,7 @@ npm ci
 npm run serve
 ```
 
-브라우저에서 **http://localhost:8080**을 엽니다.
+브라우저에서 [http://localhost:8080](http://localhost:8080)을 엽니다.
 
 - 처음에는 `mock (dev)`로 실행됩니다. 실제 AI 모델 없이 UI와 계산·시간 도구 흐름을 확인할 수 있습니다.
 - 메뉴 → **가상 OS 열기**에서 작업공간을 엽니다.
