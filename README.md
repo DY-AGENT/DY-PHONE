@@ -2,6 +2,8 @@
 
 **휴대폰에서 AI와 대화하고, 파일·문서·코드 작업까지 한곳에서.**
 
+[**Android APK 다운로드 (ARM64 휴대폰)**](https://github.com/DY-AGENT/DY-PHONE/releases/download/v3.19.0/DY-PHONE-3.19.0-arm64-v8a.apk) · [릴리스와 설치 안내](https://github.com/DY-AGENT/DY-PHONE/releases/tag/v3.19.0)
+
 DY PHONE은 Android 온디바이스 AI 비서와 **DY OS 가상 작업공간**을 결합한 앱입니다. 대화 화면에서 질문하고, 앱 안의 브라우저·메모·파일·계산기·코드·문서 도구를 열어 작업할 수 있습니다.
 
 An Android AI assistant with on-device model integration and an in-app workspace for everyday tasks.
@@ -25,6 +27,16 @@ An Android AI assistant with on-device model integration and an in-app workspace
 
 DY OS는 **이 앱 안의 작업공간**입니다. 다른 Android 앱 전체를 자동으로 조작하는 시스템 런처가 아닙니다. 기능과 파일 형식에 따라 네이티브 플러그인 또는 번들 라이브러리가 필요합니다.
 
+## APK 설치
+
+1. [휴대폰용 ARM64 APK](https://github.com/DY-AGENT/DY-PHONE/releases/download/v3.19.0/DY-PHONE-3.19.0-arm64-v8a.apk)를 내려받아 엽니다.
+2. Android가 요청하면 해당 브라우저 또는 파일 앱의 **이 출처의 앱 설치 허용**을 켜고 설치합니다.
+3. DY PHONE을 열어 모델 설정 화면에서 모델을 받습니다. 모델은 약 2.59GB이며 APK와 별도입니다. Wi-Fi와 4GB 이상의 여유 저장 공간을 권장합니다.
+
+Android 7.0 이상, 64비트 ARM 휴대폰용입니다. 네이티브 라이브러리를 모두 묶은 통합 APK와 SHA-256 체크섬은 [릴리스 페이지](https://github.com/DY-AGENT/DY-PHONE/releases/tag/v3.19.0)에 있습니다. 32비트 ARM 기기는 지원하지 않습니다.
+
+APK 빌드·서명·패키지 검사는 완료했습니다. Android 실기기 설치·실행 및 모델 추론은 아직 검증하지 않았습니다. 자세한 확인 범위는 [검증 기록](docs/VALIDATION.md)을 참고하세요.
+
 ## 브라우저에서 실행하기
 
 Node.js와 npm이 필요합니다.
@@ -45,7 +57,7 @@ npm run serve
 
 ## Android 빌드
 
-이 저장소는 **소스 코드 배포**입니다. 이 최초 공개에는 검증된 설치용 APK가 포함되어 있지 않습니다.
+서명된 설치용 APK는 [GitHub 릴리스](https://github.com/DY-AGENT/DY-PHONE/releases/latest)에서 받을 수 있습니다. 아래는 소스에서 직접 빌드하는 방법입니다.
 
 준비: Node.js, JDK 17, Android SDK Platform 34 및 Android 빌드 도구.
 
@@ -58,7 +70,7 @@ cd android
 Windows PowerShell:
 
 ```powershell
-.\gradlew.bat assembleRelease
+.\gradlew.bat -Pandroid.overridePathCheck=true assembleRelease
 ```
 
 macOS / Linux:

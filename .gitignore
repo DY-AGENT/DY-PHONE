@@ -16,3 +16,4 @@ android/local.properties
 *.pem
 *.key
 __pycache__/
+.kotlin/
