@@ -1,0 +1,18 @@
+node_modules/
+/ios/
+*.log
+.DS_Store
+
+# Signing — never commit keys or passwords
+*.keystore
+*.jks
+android/keystore.properties
+
+# Local state and credentials
+.env
+.env.*
+!.env.example
+android/local.properties
+*.pem
+*.key
+__pycache__/

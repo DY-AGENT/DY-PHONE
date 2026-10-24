@@ -1,0 +1,16 @@
+{
+  "appId": "com.dyagent.mobile",
+  "appName": "DY PHONE",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": true
+  },
+  "plugins": {
+    "CapacitorHttp": {
+      "enabled": true
+    }
+  }
+}

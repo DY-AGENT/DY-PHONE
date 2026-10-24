@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b0d12" />
+    <title>DY PHONE</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3a9 9 0 1 0 9 9' fill='none' stroke='%23ff6b3d' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M21 12a9 9 0 0 0-9-9' fill='none' stroke='%233d7bff' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23e8ecf4'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Hand-drawn icon set: every glyph in the app is an inline SVG defined here. -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+      <defs>
+        <!-- brand mark: the agent loop (perceive → act → observe) -->
+        <g id="i-mark">
+          <path d="M12 3a9 9 0 1 0 9 9" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M21 12a9 9 0 0 0-9-9" fill="none" stroke="var(--accent-2)" stroke-width="2.4" stroke-linecap="round"/>
+          <circle cx="12" cy="12" r="3" fill="var(--text)"/>
+        </g>
+        <!-- settings: two sliders -->
+        <g id="i-sliders" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M4 7.5h8.6M18.4 7.5H20M4 16.5h3.6M13.4 16.5H20"/>
+          <circle cx="15.5" cy="7.5" r="2.3"/>
+          <circle cx="10.5" cy="16.5" r="2.3"/>
+        </g>
+        <!-- camera -->
+        <g id="i-camera" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+          <path d="M5 7.5h2.1l1.5-2.1h6.8l1.5 2.1H19a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5a2 2 0 0 1 2-2Z"/>
+          <circle cx="12" cy="13" r="3.4"/>
+        </g>
+        <!-- gallery / image -->
+        <g id="i-image" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
+          <rect x="3.5" y="5" width="17" height="14" rx="2.5"/>
+          <circle cx="9" cy="10" r="1.6"/>
+          <path d="M6.2 16.4l3.8-3.9 2.9 2.9 2.4-2.4 2.5 2.6"/>
+        </g>
+        <!-- send: paper plane -->
+        <g id="i-send" fill="currentColor">
+          <path d="M3.4 11.05 20.2 3.6c.9-.4 1.82.52 1.42 1.42l-7.46 16.8c-.42.95-1.8.87-2.11-.12l-1.9-6.06a1.2 1.2 0 0 0-.79-.79l-6.06-1.9c-.99-.31-1.07-1.68-.12-2.1Z"/>
+        </g>
+        <!-- stop: rounded square (shown while generating) -->
+        <g id="i-stop" fill="currentColor">
+          <rect x="6.5" y="6.5" width="11" height="11" rx="2.6"/>
+        </g>
+        <!-- tool call: bolt -->
+        <g id="i-bolt" fill="currentColor">
+          <path d="M13.2 2.6 5.4 12.8c-.31.4-.02 1 .5 1h4.55l-1.63 6.85c-.13.57.58.92.94.46l7.8-10.2c.31-.4.02-1-.5-1h-4.55l1.63-6.85c.13-.57-.58-.92-.94-.46Z"/>
+        </g>
+        <!-- download: arrow into tray -->
+        <g id="i-download" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 4v10.4M7.6 10.6 12 15l4.4-4.4M4.5 18.5h15"/>
+        </g>
+        <!-- grid: workspace / apps -->
+        <g id="i-grid" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+          <rect x="4" y="4" width="7" height="7" rx="1.6"/>
+          <rect x="13" y="4" width="7" height="7" rx="1.6"/>
+          <rect x="4" y="13" width="7" height="7" rx="1.6"/>
+          <rect x="13" y="13" width="7" height="7" rx="1.6"/>
+        </g>
+        <!-- close: X -->
+        <g id="i-close" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </g>
+        <!-- menu: hamburger -->
+        <g id="i-menu" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+          <path d="M4 7h16M4 12h16M4 17h16"/>
+        </g>
+        <!-- chat bubble -->
+        <g id="i-chat" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+          <path d="M5 5h14a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 19 16H9l-4 3.5V6.5A1.5 1.5 0 0 1 6.5 5Z"/>
+        </g>
+        <!-- chevron left -->
+        <g id="i-chevron" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.5 6l-6 6 6 6"/>
+        </g>
+      </defs>
+    </svg>
+
+    <header class="topbar">
+      <button class="icon-btn" id="menuBtn" title="메뉴" aria-label="메뉴">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+      <div class="brand">
+        <button class="brand-btn" id="thinkBtn" title="생각 모드 켜기/끄기" aria-label="생각 모드 전환">
+          <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mark"/></svg>
+        </button>
+        DY PHONE
+        <span class="think-pill" id="thinkPill">생각 ON</span>
+      </div>
+      <div class="status" id="status">
+        <span class="dot" id="statusDot"></span><span id="statusText">확인 중…</span>
+      </div>
+      <button class="icon-btn" id="settingsBtn" title="설정" aria-label="설정">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-sliders"/></svg>
+      </button>
+    </header>
+
+    <!-- Sidebar drawer -->
+    <div class="drawer-scrim" id="drawerScrim" hidden></div>
+    <aside class="drawer" id="drawer" hidden>
+      <div class="drawer-brand">
+        <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mark"/></svg>
+        <b>DY PHONE</b>
+      </div>
+      <button class="drawer-item accent" id="drawerOs">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-grid"/></svg> 가상 OS 열기
+      </button>
+      <button class="drawer-item" id="drawerSettings">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-sliders"/></svg> 설정
+      </button>
+      <div class="drawer-sep"></div>
+      <button class="drawer-item" id="drawerNew">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chat"/></svg> ＋ 새 대화
+      </button>
+      <div class="drawer-convo-label">대화 기록</div>
+      <div class="drawer-convos" id="drawerConvos"></div>
+    </aside>
+
+    <!-- DY OS: the agent's in-app virtual OS workspace -->
+    <section class="workspace" id="workspace" hidden>
+      <div class="workspace-head">
+        <button class="ws-back" id="workspaceClose">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron"/></svg> 대화로 돌아가기
+        </button>
+        <b>DY OS</b>
+      </div>
+      <div class="vos-root" id="vosRoot"></div>
+    </section>
+
+    <main class="chat" id="chat">
+      <section class="model-card" id="modelCard" hidden>
+        <div class="model-card-head">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-download"/></svg>
+          <b>모델 설정이 필요해요</b>
+          <button type="button" class="card-x" id="modelCardClose" aria-label="닫기">×</button>
+        </div>
+        <p class="hint">
+          Gemma 4 E2B 모델 파일(~3&nbsp;GB)을 기기에 한 번만 내려받으면 됩니다.
+          Wi-Fi 연결을 권장해요. 다운로드는 시스템이 대신 받아주기 때문에
+          <b>화면을 꺼도, 앱을 닫아도 계속 진행</b>되고, 진행률은 알림창에서도
+          볼 수 있어요. 여유 저장 공간이 4GB 이상 필요합니다.
+        </p>
+        <label class="model-url">모델 URL
+          <input id="modelUrl" spellcheck="false"
+            value="https://huggingface.co/litert-community/gemma-4-E2B-it-litert-lm/resolve/main/gemma-4-E2B-it.litertlm" />
+        </label>
+        <div class="model-actions">
+          <button id="modelDownloadBtn" class="primary">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-download"/></svg>
+            다운로드
+          </button>
+          <button id="modelRestartBtn" class="model-restart">처음부터 다시</button>
+          <span class="model-note" id="modelNote"></span>
+        </div>
+        <div class="progress" id="modelProgress" hidden>
+          <div class="progress-bar" id="modelProgressBar"></div>
+          <span class="progress-text" id="modelProgressText">0%</span>
+        </div>
+      </section>
+
+      <div class="msg agent">
+        <div class="bubble">안녕하세요! 저는 <b>DY PHONE</b>, 폰에서 도는 온디바이스 AI 에이전트예요. Gemma 4 E2B로 구동되고 이미지도 볼 수 있어요. 무엇을 도와드릴까요?</div>
+      </div>
+    </main>
+
+    <div class="attach-tray" id="attachTray" hidden></div>
+
+    <form class="composer" id="composer">
+      <button type="button" class="icon-btn" id="cameraBtn" title="카메라" aria-label="카메라">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-camera"/></svg>
+      </button>
+      <button type="button" class="icon-btn" id="galleryBtn" title="이미지 첨부" aria-label="이미지 첨부">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-image"/></svg>
+      </button>
+      <input type="file" id="fileInput" accept="image/*" hidden multiple />
+      <textarea id="input" rows="1" placeholder="메시지를 입력하세요…" autocomplete="off"></textarea>
+      <button type="submit" class="send-btn" id="sendBtn" title="보내기" aria-label="보내기">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-send"/></svg>
+      </button>
+    </form>
+
+    <dialog id="settings" class="settings">
+      <form method="dialog">
+        <h3>설정</h3>
+        <p class="hint">
+          온디바이스 모드에서는 폰의 Gemma 4 E2B가 사용됩니다. 브라우저 개발 테스트용으로는
+          아래에 OpenAI 호환 엔드포인트를 넣을 수 있어요(선택).
+        </p>
+        <label>Base URL<input id="epBase" placeholder="https://…/v1" /></label>
+        <label>Model<input id="epModel" placeholder="gemma-4-e2b" /></label>
+        <label>API Key<input id="epKey" type="password" placeholder="(선택)" /></label>
+        <div class="row">
+          <button value="save" id="saveEp">저장</button>
+          <button value="clear" id="clearEp" class="ghost">지우기</button>
+          <button value="cancel" class="ghost">닫기</button>
+        </div>
+        <hr />
+        <button value="wipe" id="wipeMem" class="ghost danger">에이전트 메모리 초기화</button>
+        <p class="hint" style="text-align:center">DY PHONE v3.19 · 코드 저장 원인 표시 + 생각 안에 든 코드도 저장</p>
+      </form>
+    </dialog>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
