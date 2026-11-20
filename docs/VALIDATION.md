@@ -1,58 +1,55 @@
-# DY PHONE 공개 전 확인
+# DY PHONE release validation
 
-웹 UI 확인일: 2026-10-24 / APK 확인일: 2026-10-25 (Asia/Seoul)
+The web interface was checked on October 24, 2026, and the APKs on October 25, 2026 (Asia/Seoul). This record covers the v3.19.0 release.
 
-## 통과한 확인
+## Source and packaging checks
 
-- `npm ci --ignore-scripts --no-audit --no-fund`: 잠금 파일로 의존성 설치.
-- `npx cap sync android`: 웹 자산과 DY PHONE 설정을 Android 프로젝트로 복사하고 플러그인 연결 갱신.
-- 앱 JavaScript 모듈 7개 구문 검사와 Android XML 파싱.
-- Android 런처 이름, 액티비티 제목, Capacitor 앱 이름, HTML 제목, 인사말, 시스템 프롬프트, 모델 다운로드 및 생성 알림의 DY PHONE 표시.
-- Android application ID `com.dyagent.mobile`와 기존 내부 저장 키 유지.
-- 공개할 파일에서 개인 키 및 일반적인 토큰 패턴 검사. 개인 키·환경 파일·서명 설정·로컬 SDK 경로·node_modules는 제외.
-- 원본 ZIP의 외부 라이브러리와 기존 PNG 35개는 바이트 동일.
+- Installed the locked dependencies with `npm ci --ignore-scripts --no-audit --no-fund`.
+- Ran `npx cap sync android` to copy the web assets and app configuration into the Android project and update the plugin registrations.
+- Checked the syntax of seven application JavaScript modules and parsed the Android XML files.
+- Verified the DY PHONE name in the Android launcher, activity title, Capacitor configuration, HTML title, greeting, system prompt, and notifications for model downloads and generation.
+- Verified the existing Android application ID (`com.dyagent.mobile`) and internal storage keys.
+- Scanned the files selected for publication for private keys and common token patterns. The release source excludes private keys, environment files, signing configuration, local SDK paths, and `node_modules`.
+- Compared the third-party libraries and 35 existing PNG files with the original ZIP. They matched byte for byte.
 
-## 실제 브라우저 동작
+## Browser checks
 
-Chrome에서 로컬 웹 서버의 앱을 실행하고 412 × 892 CSS 픽셀 크기로 확인했습니다.
+The app ran from a local web server in Chrome with a 412 × 892 CSS pixel viewport. The interface and test prompt were in Korean.
 
-1. 제목과 대화 인사말에 DY PHONE 표시.
-2. `12000 * 3 + 5000 계산해 줘` 입력 → mock 백엔드가 calculator 도구 호출 → `41000` 반환.
-3. 메뉴 → 가상 OS 열기 → DY OS 앱 그리드 표시.
-4. 코드 → 기본 JavaScript 예제 실행 → `1~10 합 = 55` 표시.
+| Action | Observed result |
+| --- | --- |
+| Open the chat | The title and greeting displayed DY PHONE. |
+| Ask the assistant to calculate `12000 * 3 + 5000` | The mock backend called the calculator and returned `41000`. |
+| Open the virtual OS from the chat menu | The DY OS app grid appeared. |
+| Open the code editor and run its default JavaScript example | The output reported that the sum of the integers from 1 to 10 was `55`. |
 
-## 이미지 출처
+The [chat](images/chat-mobile.png), [workspace](images/workspace-mobile.png), and [code editor](images/code-mobile.png) screenshots capture those browser checks. The [original preview image](images/dy-phone-preview.png) combines the captures with a title and captions. The screens and responses came from the running web interface. The `mock (dev)` label identifies the demo backend.
 
-`docs/images/chat-mobile.png`, `workspace-mobile.png`, `code-mobile.png`는 위 동작을 직접 수행한 실제 웹 UI 캡처입니다. `dy-phone-preview.png`는 이 세 이미지를 배치하고 제목·설명을 추가한 미리보기입니다. 화면 내용이나 모델 응답을 합성하지 않았습니다. `mock (dev)` 표시는 데모 백엔드라는 뜻입니다.
+## Android release checks
 
-## 이번에 확인하지 않은 범위
+- Built `assembleRelease` with JDK 17, Gradle 8.14.2, Android Gradle Plugin 8.13.2, Kotlin 2.3.10, and Android SDK Platform 34. The build used `-Pandroid.overridePathCheck=true` for a Windows path containing Korean characters.
+- Verified the application ID `com.dyagent.mobile`, display name `DY PHONE`, version code `40`, and version name `3.19`. The GitHub release tag is `v3.19.0`.
+- Signed the APKs with a dedicated release key. Both passed APK Signature Scheme v2 and v3 verification and `zipalign -c -v 4`.
+- Verified ZIP integrity, compared the main bundled web assets byte for byte with their source files, and confirmed the Capacitor app name.
+- Sent an HTTP HEAD request to the model download URL. It returned HTTP 200 and reported a file size of 2,588,147,712 bytes. The check covered the download metadata only.
+- Checked that the public source and APKs excluded the private signing key, passwords, and local SDK settings.
+- Ran `:app:lintRelease`. It passed with 0 errors and 33 warnings recorded in the lint report.
 
-- Android 실기기 설치·실행 (연결된 실기기 없음).
-- 모델 파일 다운로드, LiteRT-LM 네이티브 추론, 이미지 이해, 속도·메모리·배터리 사용량.
-- Android 카메라·통화·문자·백그라운드 서비스, 전체 문서 형식의 내보내기·미리보기.
-
-화면 및 소스 검사를 위 기능의 실기기 검증으로 해석하면 안 됩니다.
-
-## 2026-10-25 APK 릴리스 확인
-
-- JDK 17 + Gradle 8.14.2 + Android Gradle Plugin 8.13.2 + Kotlin 2.3.10 + Android SDK Platform 34로 `assembleRelease` 성공. 한글 Windows 경로에서는 `-Pandroid.overridePathCheck=true` 사용.
-- APK application ID `com.dyagent.mobile`, 표시 이름 `DY PHONE`, versionCode `40`, versionName `3.19` 확인. 배포 태그는 `v3.19.0`.
-- 별도 릴리스 키로 서명. APK Signature Scheme v2/v3 검증 및 `zipalign -c -v 4` 통과.
-- APK ZIP 무결성 검사 통과. 주요 웹 자산이 소스와 바이트 동일하고 Capacitor 앱 이름이 DY PHONE임을 확인.
-- 모델 다운로드 URL에 HEAD 요청이 HTTP 200을 반환하며 파일 크기는 2,588,147,712바이트임을 확인. 모델 전체 다운로드 또는 모델 추론 검증은 수행하지 않음.
-- 개인 서명 키·비밀번호·로컬 SDK 설정은 공개 소스와 APK에 포함하지 않음.
-
-서명 인증서 SHA-256:
+**Signing certificate SHA-256**
 
 ```text
 31aa1c077e610de2aaeb1a702b07086d4b6711b04ec9e5811e09e07d7ab80736
 ```
 
-| 파일 | 바이트 | 네이티브 ABI | SHA-256 |
+| File | Bytes | Native architectures | SHA-256 |
 | --- | ---: | --- | --- |
 | DY-PHONE-3.19.0-arm64-v8a.apk | 28383271 | arm64-v8a | `1e20290f389eed190e33d431336ae5d3f021546f4688a65c99c70762ddeef30f` |
 | DY-PHONE-3.19.0-universal.apk | 53033630 | arm64-v8a, x86_64 | `2a9f8b04ca3fdce251bc85259c01d26f49f83813d024420fedec851a980d36ad` |
 
-Android 실기기 설치·실행, 네이티브 플러그인의 실제 동작, 기기별 모델 추론은 여전히 미검증입니다. APK 서명과 패키지 검사는 실기기 동작 검증을 대신하지 않습니다.
+## Features still awaiting verification
 
-추가 정적 검사: `:app:lintRelease` 통과. 오류 0건, 경고 33건. 경고는 검사 보고서에 남아 있으며 전체 경고가 해소된 상태는 아닙니다.
+No physical Android device was connected for this release. The following items remained untested:
+
+- Installation and launch on a device, including the native plugins.
+- A full model download, native LiteRT-LM inference, image understanding, and device-specific speed, memory use, and battery use.
+- Camera access, calls, text messages, background services, and export and preview across all document formats.
